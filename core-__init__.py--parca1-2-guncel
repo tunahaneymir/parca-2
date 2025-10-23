@@ -1,0 +1,95 @@
+"""
+Core PA Detection & Entry/Exit Modules - Parça 1 & 2
+
+This module contains:
+
+PARÇA 1 - Price Action Detection:
+- Trend Detection (EMA-based with sideways filtering)
+- Zone Detection (ZigZag++ and Swing High/Low)
+- Zone Quality Scoring (0-10 rating system)
+
+PARÇA 2 - Entry & Exit System:
+- ChoCH Detection (Change of Character)
+- Fibonacci Calculator (0.705, 0.618 levels)
+- Entry System (Complete entry orchestration)
+- Exit System (TP1/TP2/TP3 with trailing)
+
+Usage:
+    from core import (
+        TrendDetector, ZoneDetector, 
+        ChoCHDetector, FibonacciCalculator,
+        EntrySystem, ExitSystem
+    )
+    
+    # Initialize
+    trend_detector = TrendDetector(config)
+    entry_system = EntrySystem(config)
+    exit_system = ExitSystem(config)
+    
+    # Detect trend
+    trend = trend_detector.detect(close, high, low)
+    
+    # Check entry
+    entry_signal = entry_system.check_entry(
+        high, low, close, open, volume, 
+        direction="LONG"
+    )
+    
+    # Manage exits
+    position = exit_system.initialize_position(...)
+    exit_signal = exit_system.check_exit(position, ...)
+"""
+
+# Parça 1: Price Action Detection
+from .trend_detector import TrendDetector, TrendResult
+from .zone_detector import ZoneDetector, Zone, ZigZagPoint
+from .zone_quality_scorer import ZoneQualityScorer
+
+# Parça 2: Entry & Exit System
+from .choch_detector import ChoCHDetector, ChoCHResult, SwingPoint
+from .fibonacci_calculator import FibonacciCalculator, FibonacciLevels
+from .entry_system import EntrySystem, EntrySignal
+from .exit_system import ExitSystem, ExitSignal, PositionState, TakeProfitLevel
+
+__all__ = [
+    # ═══════════════════════════════════════════════════════════
+    # PARÇA 1: Price Action Detection
+    # ═══════════════════════════════════════════════════════════
+    
+    # Trend Detection
+    'TrendDetector',
+    'TrendResult',
+    
+    # Zone Detection
+    'ZoneDetector',
+    'Zone',
+    'ZigZagPoint',
+    
+    # Quality Scoring
+    'ZoneQualityScorer',
+    
+    # ═══════════════════════════════════════════════════════════
+    # PARÇA 2: Entry & Exit System
+    # ═══════════════════════════════════════════════════════════
+    
+    # ChoCH Detection
+    'ChoCHDetector',
+    'ChoCHResult',
+    'SwingPoint',
+    
+    # Fibonacci
+    'FibonacciCalculator',
+    'FibonacciLevels',
+    
+    # Entry System
+    'EntrySystem',
+    'EntrySignal',
+    
+    # Exit System
+    'ExitSystem',
+    'ExitSignal',
+    'PositionState',
+    'TakeProfitLevel',
+]
+
+__version__ = '2.0.0'  # Parça 1 + Parça 2
